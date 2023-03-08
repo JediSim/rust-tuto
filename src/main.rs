@@ -1,39 +1,10 @@
+use crate::mod_files::mod_guess_number::guess_number_game;
+use crate::mod_files::mod_gui::launch_gui;
 use crate::mod_files::mod_test::MessageMod;
-use rand::Rng;
-use std::cmp::Ordering;
+
 use std::{io, process::exit};
 
 pub mod mod_files;
-
-fn guess_number_game() {
-    println!("Guess the number!");
-
-    let secret_number = rand::thread_rng().gen_range(1..=100);
-
-    println!("The secret number is: {secret_number}");
-
-    println!("Please input your guess.");
-    loop {
-        let mut guess = String::new();
-
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
-
-        println!("You guessed: {guess}");
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal => {
-                println!("You win!");
-                break;
-            }
-        }
-    }
-}
 
 fn takes_ownership(some_string: String) {
     // some_string comes into scope
@@ -120,6 +91,7 @@ fn main() {
         println!("2. Ownership tutorial");
         println!("3. Test of struct");
         println!("4. Test of mod");
+        println!("5. launch gui");
         println!("99. Exit");
         println!("Choose function to run:");
         let mut choice = String::new();
@@ -143,6 +115,10 @@ fn main() {
             4 => {
                 println!("<=================== Test of mod ====================>");
                 test_mod();
+            }
+            5 => {
+                println!("<=================== Launch gui ====================>");
+                launch_gui();
             }
             99 => {
                 exit(0);
